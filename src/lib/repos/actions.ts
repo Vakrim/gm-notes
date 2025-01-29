@@ -21,18 +21,30 @@ export async function markNoteAsPrivate(id: string) {
   revalidatePath("/notes");
 }
 
-export async function updateNoteNameAndContent({
+export async function updateNoteName({
   id,
   name,
-  content,
 }: {
   id: string;
   name: string;
-  content: string;
 }) {
   await updateNote({
     id,
     name,
+  });
+
+  revalidatePath("/notes");
+}
+
+export async function updateNoteContent({
+  id,
+  content,
+}: {
+  id: string;
+  content: string;
+}) {
+  await updateNote({
+    id,
     content,
   });
 

@@ -4,7 +4,8 @@ import { useState } from "react";
 import {
   markNoteAsPrivate,
   markNoteAsPublic,
-  updateNoteNameAndContent,
+  updateNoteContent,
+  updateNoteName,
 } from "../../lib/repos/actions";
 import { Note as NoteObject } from "../../lib/repos/notes";
 import ContentEditable from "react-contenteditable";
@@ -25,6 +26,12 @@ export const Note = ({ note }: { note: NoteObject }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onBlur={async () => {
+            await updateNoteName({
+              id: note.id,
+              name,
+            });
+          }}
         />
 
         <label className="flex items-center">
@@ -49,6 +56,12 @@ export const Note = ({ note }: { note: NoteObject }) => {
         html={content}
         onChange={(e) => {
           setContent(addTags(sanitizeNoteContent(e.target.value)));
+        }}
+        onBlur={async () => {
+          await updateNoteContent({
+            id: note.id,
+            content,
+          });
         }}
       />
     </div>

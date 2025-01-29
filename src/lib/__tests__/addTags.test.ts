@@ -58,6 +58,15 @@ describe("addTags", () => {
     );
   });
 
+  it("fixes existing tags", () => {
+    const content =
+      "This is a test <span class='note-tag'>#multiple word tag</span> #tag2";
+    const result = addTags(content);
+    expect(result).toBe(
+      'This is a test <span class="note-tag">#multiple</span> word tag <span class="note-tag">#tag2</span>',
+    );
+  });
+
   it('creates empty tags for "#"', () => {
     const content = "This is a test #";
     const result = addTags(content);
