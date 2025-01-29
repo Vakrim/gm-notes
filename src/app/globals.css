@@ -15,8 +15,6 @@ body {
   min-height: 100vh;
 }
 
-@layer components {
-  .note-tag {
-    @apply inline-block px-2 py-1 text-sm font-semibold text-white bg-blue-500 rounded;
-  }
+.note-tag {
+  @apply inline-block px-2 py-1 text-sm font-semibold text-white bg-blue-500 rounded;
 }

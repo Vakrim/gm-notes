@@ -9,6 +9,7 @@ import {
 import { Note as NoteObject } from "../../lib/repos/notes";
 import ContentEditable from "react-contenteditable";
 import { sanitizeNoteContent } from "../../lib/sanitizeNoteContent";
+import { addTags } from "../../lib/addTags";
 
 export const Note = ({ note }: { note: NoteObject }) => {
   const [name, setName] = useState(note.name);
@@ -47,19 +48,9 @@ export const Note = ({ note }: { note: NoteObject }) => {
       <ContentEditable
         html={content}
         onChange={(e) => {
-          setContent(sanitizeNoteContent(e.target.value));
+          setContent(addTags(sanitizeNoteContent(e.target.value)));
         }}
       />
-
-      <button
-        onClick={() => {
-          setContent((current) =>
-            sanitizeNoteContent(current + " <span class='note-tag'>tag</span>"),
-          );
-        }}
-      >
-        add tag
-      </button>
     </div>
   );
 };
