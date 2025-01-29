@@ -5,7 +5,7 @@ export function sanitizeNoteContent(content: string) {
 }
 
 const sanitizationConfig: sanitizeHtml.IOptions = {
-  allowedTags: ["span"],
+  allowedTags: ["span", "br"],
   allowedAttributes: {},
   allowedClasses: { span: ["note-tag"] },
 };

@@ -72,4 +72,12 @@ describe("addTags", () => {
     const result = addTags(content);
     expect(result).toBe('This is a test <span class="note-tag">#</span>');
   });
+
+  it("keeps <br> tags", () => {
+    const content = "This <br />is a test<br>#tag";
+    const result = addTags(content);
+    expect(result).toBe(
+      'This <br>is a test<br><span class="note-tag">#tag</span>',
+    );
+  });
 });
