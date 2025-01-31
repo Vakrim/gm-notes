@@ -8,16 +8,15 @@ import {
   updateNoteName,
 } from "../../lib/repos/actions";
 import { Note as NoteObject } from "../../lib/repos/notes";
+import { textInput } from "../../lib/ui/tailwindClasses";
+import clsx from "clsx";
 
 export const Note = ({ note }: { note: NoteObject }) => {
   const [name, setName] = useState(note.name);
   const [content, setContent] = useState(note.content);
 
   return (
-    <div
-      key={note.id}
-      className="note mb-4 p-4 bg-white rounded-lg flex flex-col gap-4 shadow-md"
-    >
+    <div key={note.id} className="note card mb-4 flex flex-col gap-4 ">
       <div className="flex justify-between items-center">
         <input
           type="text"
@@ -29,7 +28,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
               name,
             });
           }}
-          className="border border-gray-300 rounded px-2 py-1 flex-grow mr-2"
+          className={clsx(textInput, "flex-grow mr-2")}
         />
 
         <label className="flex items-center">
