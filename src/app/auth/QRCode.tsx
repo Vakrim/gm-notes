@@ -23,7 +23,6 @@ export const QRCode = ({
 
   return (
     <>
-      {uri.toString()}
       <Canvas
         text={uri.toString()}
         options={{

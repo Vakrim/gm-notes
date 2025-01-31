@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { textInput } from "../../lib/ui/tailwindClasses";
-import { signIn, verifyLogin } from "../../lib/auth/signUp";
+import { signIn } from "../../lib/auth/signIn";
+import { verifyLogin } from "@/lib/auth/verifyLogin";
 import { QRCode } from "./QRCode";
 import { assertNever } from "../../lib/assertNever";
 
@@ -12,7 +13,6 @@ export const AuthForm = () => {
     | { step: "signInVerifyOTP" }
     | { step: "signUpVerifyOTP"; secret: string }
   >({ step: "verifyLogin" });
-
   const [login, setLogin] = useState("");
   const [otp, setOTP] = useState("");
 
@@ -34,7 +34,11 @@ export const AuthForm = () => {
       formStep.step === "signInVerifyOTP" ||
       formStep.step === "signUpVerifyOTP"
     ) {
-      await signIn({ login, otp });
+      const response = await signIn({ login, otp });
+
+      if (response.error) {
+        alert(response.error);
+      }
 
       return;
     }
