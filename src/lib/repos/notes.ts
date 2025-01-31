@@ -1,5 +1,4 @@
 import { db } from "../db";
-import { sanitizeNoteContent } from "../sanitizeNoteContent";
 
 export interface Note {
   id: string;
@@ -30,10 +29,6 @@ export function updateNote({
   isPublic?: boolean;
   content?: string;
 }) {
-  if (content !== undefined) {
-    content = sanitizeNoteContent(content);
-  }
-
   return db.note.update({
     where: { id },
     data: { isPublic, content, name },

@@ -8,9 +8,6 @@ import {
   updateNoteName,
 } from "../../lib/repos/actions";
 import { Note as NoteObject } from "../../lib/repos/notes";
-import ContentEditable from "react-contenteditable";
-import { sanitizeNoteContent } from "../../lib/sanitizeNoteContent";
-import { addTags } from "../../lib/addTags";
 
 export const Note = ({ note }: { note: NoteObject }) => {
   const [name, setName] = useState(note.name);
@@ -19,9 +16,9 @@ export const Note = ({ note }: { note: NoteObject }) => {
   return (
     <div
       key={note.id}
-      className="note mb-4 p-4 bg-white rounded-lg flex flex-col gap-1"
+      className="note mb-4 p-4 bg-white rounded-lg flex flex-col gap-4 shadow-md"
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <input
           type="text"
           value={name}
@@ -32,6 +29,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
               name,
             });
           }}
+          className="border border-gray-300 rounded px-2 py-1 flex-grow mr-2"
         />
 
         <label className="flex items-center">
@@ -52,10 +50,10 @@ export const Note = ({ note }: { note: NoteObject }) => {
         </label>
       </div>
 
-      <ContentEditable
-        html={content}
+      <textarea
+        value={content}
         onChange={(e) => {
-          setContent(addTags(sanitizeNoteContent(e.target.value)));
+          setContent(e.target.value);
         }}
         onBlur={async () => {
           await updateNoteContent({
@@ -63,6 +61,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
             content,
           });
         }}
+        className="border border-gray-300 rounded px-2 py-1 w-full h-32"
       />
     </div>
   );
