@@ -24,7 +24,7 @@ model Story {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user  User   @relation(fields: [userId], references: [id])
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   notes Note[]
 }
 
@@ -37,5 +37,5 @@ model Note {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  story Story @relation(fields: [storyId], references: [id])
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
 }

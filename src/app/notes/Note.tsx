@@ -6,7 +6,7 @@ import {
   markNoteAsPublic,
   updateNoteContent,
   updateNoteName,
-} from "../../lib/repos/actions";
+} from "../../lib/notes/actions";
 import { Note as NoteObject } from "../../lib/repos/notes";
 import { textInput } from "../../lib/ui/tailwindClasses";
 import clsx from "clsx";

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { updateNote } from "./notes";
+import { updateNote } from "../repos/notes";
 
 export async function markNoteAsPublic(id: string) {
   await updateNote({

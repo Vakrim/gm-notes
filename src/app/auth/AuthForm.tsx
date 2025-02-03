@@ -22,7 +22,9 @@ export const AuthForm = () => {
     if (formStep.step === "verifyLogin") {
       const loginState = await verifyLogin({ login });
 
-      if (loginState.loginExists) {
+      if ("error" in loginState) {
+        alert(loginState.error);
+      } else if (loginState.loginExists) {
         setFormStep({ step: "signInVerifyOTP" });
       } else {
         setFormStep({ step: "signUpVerifyOTP", secret: loginState.secret });
