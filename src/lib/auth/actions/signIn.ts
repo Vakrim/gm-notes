@@ -1,9 +1,9 @@
 "use server";
 
-import { getUserByLogin } from "../repos/user";
+import { getUserByLogin } from "../../repos/user";
 import { TOTP } from "totp-generator";
 import { redirect } from "next/navigation";
-import { getSessionWithMeta } from "./getSession";
+import { getSessionWithMeta } from "../getSession";
 
 export async function signIn({ login, otp }: { login: string; otp: string }) {
   const user = await getUserByLogin(login);

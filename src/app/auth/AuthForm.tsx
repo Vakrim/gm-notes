@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { textInput } from "../../lib/ui/tailwindClasses";
-import { signIn } from "../../lib/auth/signIn";
-import { verifyLogin } from "@/lib/auth/verifyLogin";
+import { signIn } from "../../lib/auth/actions/signIn";
+import { verifyLogin } from "@/lib/auth/actions/verifyLogin";
 import { QRCode } from "./QRCode";
 import { assertNever } from "../../lib/assertNever";
 

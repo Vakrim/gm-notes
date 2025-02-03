@@ -1,7 +1,7 @@
 "use server";
 
 import { ZodError } from "zod";
-import { getUserByLogin, createUser } from "../repos/user";
+import { getUserByLogin, createUser } from "../../repos/user";
 
 export async function verifyLogin({
   login,
