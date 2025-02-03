@@ -32,7 +32,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">DM Notes</h1>
+          <h1 className="text-xl font-bold">Game Master Notes</h1>
           <div className="flex items-center gap-4">
             {session && <span>Logged in as: {session.login}</span>}
             <SignOutButton />
