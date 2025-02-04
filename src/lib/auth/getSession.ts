@@ -18,3 +18,13 @@ export async function getSession() {
 
   return session.data ?? null;
 }
+
+export async function getAuthenticatedSession() {
+  const session = await getSession();
+
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  return session;
+}

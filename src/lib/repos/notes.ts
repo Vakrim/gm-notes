@@ -7,17 +7,6 @@ export interface Note {
   isPublic: boolean;
 }
 
-export function getAllNotes() {
-  return db.note.findMany({
-    select: {
-      id: true,
-      name: true,
-      content: true,
-      isPublic: true,
-    },
-  });
-}
-
 export function updateNote({
   id,
   name,

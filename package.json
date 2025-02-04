@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "migrate-db": "prisma migrate dev",
+    "setup-db": "prisma migrate reset --force",
+    "generateOTP": "bun run scripts/generateOTP.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.3.0",
@@ -38,5 +41,8 @@
     "typescript": "^5.7.3",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^0.34.6"
+  },
+  "prisma": {
+    "seed": "bun run ./prisma/seed.ts"
   }
 }
