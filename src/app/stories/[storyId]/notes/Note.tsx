@@ -6,9 +6,9 @@ import {
   markNoteAsPublic,
   updateNoteContent,
   updateNoteName,
-} from "../../lib/notes/actions";
-import { Note as NoteObject } from "../../lib/repos/notes";
-import { textInput } from "../../lib/ui/tailwindClasses";
+} from "../../../../lib/notes/actions";
+import { Note as NoteObject } from "../../../../lib/repos/notes";
+import { textInput } from "../../../../lib/ui/tailwindClasses";
 import clsx from "clsx";
 
 export const Note = ({ note }: { note: NoteObject }) => {

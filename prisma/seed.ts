@@ -27,6 +27,8 @@ async function main() {
       },
     ],
   });
+
+  console.log("Seeded the database");
 }
 
 await main();

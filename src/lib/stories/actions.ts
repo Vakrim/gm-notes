@@ -1,10 +1,14 @@
 "use server";
 
 import { getAuthenticatedSession } from "../auth/getSession";
-import { getStoriesOfUser } from "../repos/stories";
+import { getStoriesOfUser, getStory as queryStory } from "../repos/stories";
 
-export async function getAllStories() {
+export async function getMyStories() {
   const session = await getAuthenticatedSession();
 
   return getStoriesOfUser(session.id);
+}
+
+export async function getStory(storyId: string) {
+  return queryStory(storyId);
 }

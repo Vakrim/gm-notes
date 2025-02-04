@@ -7,3 +7,14 @@ export function getStoriesOfUser(userId: string) {
     },
   });
 }
+
+export function getStory(storyId: string) {
+  return db.story.findUnique({
+    where: {
+      id: storyId,
+    },
+    include: {
+      notes: true,
+    },
+  });
+}

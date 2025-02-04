@@ -1,13 +1,21 @@
-import { getAllStories } from "../../lib/stories/actions";
+import { getMyStories } from "../../lib/stories/actions";
+import Link from "next/link";
 
 export default async function Stories() {
-  const stories = await getAllStories();
+  const stories = await getMyStories();
 
   return (
-    <div className="card">
+    <div className="card flex flex-col gap-4">
       <h1 className="text-2xl font-bold">Stories</h1>
+      <hr className="border-t border-gray-200" />
       {stories.map((story) => (
-        <div key={story.id}>{story.name}</div>
+        <Link
+          key={story.id}
+          href={`/stories/${story.id}/notes`}
+          className="block p-4 rounded-lg bg-white bg-gray-100 hover:bg-primary"
+        >
+          {story.name}
+        </Link>
       ))}
     </div>
   );

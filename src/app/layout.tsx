@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { getSession } from "../lib/auth/getSession";
 import { SignOutButton } from "./SignOutButton";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +33,23 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">Game Master Notes</h1>
+          <div className="flex items-center gap-4 text-xl">
+            <h1 className="py-2 px-4 font-bold">Game Master Notes</h1>
+            <div className="border-l border-white h-8"></div>
+            <Link
+              href="/stories"
+              className="py-2 px-4 rounded hover:bg-gray-700"
+            >
+              Stories
+            </Link>
+          </div>
           <div className="flex items-center gap-4">
-            {session && <span>Logged in as: {session.login}</span>}
-            <SignOutButton />
+            {session && (
+              <>
+                <span>{session.login}</span>
+                <SignOutButton />
+              </>
+            )}
           </div>
         </header>
 
