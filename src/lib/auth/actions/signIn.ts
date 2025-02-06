@@ -7,7 +7,7 @@ import { getSessionWithMeta } from "../getSession";
 import { z } from "zod";
 import {
   createResponseValidator,
-  Response,
+  ValidResponse,
 } from "../../createResponseValidator";
 
 const signInSchema = z.object({
@@ -23,7 +23,7 @@ const validateResponse = createResponseValidator(responseSchema);
 
 export async function signIn(
   params: z.infer<typeof signInSchema>,
-): Promise<Response<typeof validateResponse>> {
+): Promise<ValidResponse<typeof validateResponse>> {
   const { login, otp } = signInSchema.parse(params);
 
   const user = await getUserByLogin(login);

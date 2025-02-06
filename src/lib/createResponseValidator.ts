@@ -1,6 +1,6 @@
 import { ZodTypeAny, ZodBranded, z } from "zod";
 
-export type Response<T extends (params: never) => z.BRAND<"response">> =
+export type ValidResponse<T extends (params: never) => z.BRAND<"response">> =
   ReturnType<T>;
 
 export function createResponseValidator<T extends ZodTypeAny>(schema: T) {

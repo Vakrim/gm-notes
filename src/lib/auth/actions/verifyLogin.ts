@@ -4,7 +4,7 @@ import { z, ZodError } from "zod";
 import { getUserByLogin, createUser } from "../../repos/user";
 import {
   createResponseValidator,
-  Response,
+  ValidResponse,
 } from "../../createResponseValidator";
 
 const verifyLoginSchema = z.object({
@@ -28,7 +28,7 @@ const validateResponse = createResponseValidator(responseSchema);
 
 export async function verifyLogin(
   params: z.infer<typeof verifyLoginSchema>,
-): Promise<Response<typeof validateResponse>> {
+): Promise<ValidResponse<typeof validateResponse>> {
   const { login } = verifyLoginSchema.parse(params);
 
   const user = await getUserByLogin(login);
