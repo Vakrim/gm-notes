@@ -38,7 +38,7 @@ export default async function RootLayout({
             <div className="border-l border-white h-8"></div>
             <Link
               href="/stories"
-              className="py-2 px-4 rounded hover:bg-gray-700"
+              className="py-2 px-4 rounded-sm hover:bg-gray-700"
             >
               Stories
             </Link>
@@ -53,7 +53,7 @@ export default async function RootLayout({
           </div>
         </header>
 
-        <div className="container mx-auto max-w-screen-md p-4">{children}</div>
+        <div className="container mx-auto max-w-(--breakpoint-md) p-4">{children}</div>
       </body>
     </html>
   );

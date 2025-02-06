@@ -28,7 +28,7 @@ export default async function StoryNotesPage({
 
       <div className="note card mb-4 flex flex-col gap-4 ">
         <button
-          className="px-2 py-1 rounded bg-primary hover:bg-primary-dark"
+          className="px-2 py-1 rounded-sm bg-primary hover:bg-primary-dark"
           onClick={createNote.bind(null, story.id)}
         >
           Add new note

@@ -30,7 +30,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
               name,
             });
           }}
-          className={clsx(textInput, "flex-grow")}
+          className={clsx(textInput, "grow")}
         />
 
         <TrashButton
@@ -70,7 +70,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
             content,
           });
         }}
-        className="border border-gray-300 rounded px-2 py-1 w-full h-32"
+        className="border border-gray-300 rounded-sm px-2 py-1 w-full h-32"
       />
     </div>
   );

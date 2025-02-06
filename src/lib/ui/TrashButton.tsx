@@ -2,7 +2,7 @@ export function TrashButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="text-white rounded p-1 bg-red-200 hover:bg-red-400"
+      className="text-white rounded-sm p-1 bg-red-200 hover:bg-red-400 cursor-pointer"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
