@@ -1,5 +1,6 @@
-import { createStory, getMyStories } from "../../lib/stories/actions";
 import Link from "next/link";
+import { getMyStories } from "../../lib/stories/actions/getMyStories";
+import { createStory } from "../../lib/stories/actions/createStory";
 
 export default async function Stories() {
   const stories = await getMyStories();

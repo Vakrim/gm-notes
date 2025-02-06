@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
-import { deleteStory, getStory } from "../../../../lib/stories/actions";
 import { Note } from "./Note";
 import { createNote } from "../../../../lib/notes/actions";
 import { TrashButton } from "../../../../lib/ui/TrashButton";
+import { deleteStory } from "../../../../lib/stories/actions/deleteStory";
+import { getStory } from "../../../../lib/stories/actions/getStory";
 
 export default async function StoryNotesPage({
   params,
