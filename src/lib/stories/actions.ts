@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { getAuthenticatedSession } from "../auth/getSession";
 import * as stories from "../repos/stories";
+import { z } from "zod";
 
 export async function getMyStories() {
   const session = await getAuthenticatedSession();
@@ -22,7 +23,13 @@ export async function createStory() {
   redirect(`/stories/${story.id}/notes`);
 }
 
-export async function deleteStory(storyId: string) {
+const deleteStorySchema = z.object({
+  storyId: z.string(),
+});
+
+export async function deleteStory(params: z.infer<typeof deleteStorySchema>) {
+  const { storyId } = deleteStorySchema.parse(params);
+
   await stories.deleteStory({ storyId });
 
   redirect("/stories");

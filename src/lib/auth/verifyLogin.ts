@@ -1,17 +1,21 @@
 "use server";
 
-import { ZodError } from "zod";
+import { z, ZodError } from "zod";
 import { getUserByLogin, createUser } from "../repos/user";
 
-export async function verifyLogin({
-  login,
-}: {
-  login: string;
-}): Promise<
+const verifyLoginSchema = z.object({
+  login: z.string(),
+});
+
+export async function verifyLogin(
+  params: z.infer<typeof verifyLoginSchema>,
+): Promise<
   | { loginExists: true }
   | { loginExists: false; secret: string }
   | { error: string }
 > {
+  const { login } = verifyLoginSchema.parse(params);
+
   const user = await getUserByLogin(login);
 
   if (user) {

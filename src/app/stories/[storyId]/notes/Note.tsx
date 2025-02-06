@@ -36,7 +36,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
         <TrashButton
           onClick={async () => {
             await removeNote({
-              id: note.id,
+              noteId: note.id,
             });
           }}
         />
@@ -49,9 +49,9 @@ export const Note = ({ note }: { note: NoteObject }) => {
             className="mr-2"
             onChange={async () => {
               if (note.isPublic) {
-                await markNoteAsPrivate(note.id);
+                await markNoteAsPrivate({ noteId: note.id });
               } else {
-                await markNoteAsPublic(note.id);
+                await markNoteAsPublic({ noteId: note.id });
               }
             }}
           />

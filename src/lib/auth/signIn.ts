@@ -4,8 +4,16 @@ import { getUserByLogin } from "../repos/user";
 import { TOTP } from "totp-generator";
 import { redirect } from "next/navigation";
 import { getSessionWithMeta } from "./getSession";
+import { z } from "zod";
 
-export async function signIn({ login, otp }: { login: string; otp: string }) {
+const signInSchema = z.object({
+  login: z.string(),
+  otp: z.string(),
+});
+
+export async function signIn(params: z.infer<typeof signInSchema>) {
+  const { login, otp } = signInSchema.parse(params);
+
   const user = await getUserByLogin(login);
 
   if (!user) {
