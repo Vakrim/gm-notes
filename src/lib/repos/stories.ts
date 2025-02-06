@@ -8,7 +8,16 @@ export function getStoriesOfUser(userId: string) {
   });
 }
 
-export function getStory(storyId: string) {
+export function createNewStory({ userId }: { userId: string }) {
+  return db.story.create({
+    data: {
+      userId,
+      name: "Untitled story",
+    },
+  });
+}
+
+export function getStory({ storyId }: { storyId: string }) {
   return db.story.findUnique({
     where: {
       id: storyId,
@@ -16,5 +25,11 @@ export function getStory(storyId: string) {
     include: {
       notes: true,
     },
+  });
+}
+
+export function deleteStory({ storyId }: { storyId: string }) {
+  return db.story.delete({
+    where: { id: storyId },
   });
 }

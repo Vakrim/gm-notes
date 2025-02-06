@@ -1,24 +1,24 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { updateNote } from "../repos/notes";
+import * as notes from "../repos/notes";
 
 export async function markNoteAsPublic(id: string) {
-  await updateNote({
+  const note = await notes.updateNote({
     id,
     isPublic: true,
   });
 
-  revalidatePath("/notes");
+  revalidatePath(`/stories/${note.storyId}/notes`);
 }
 
 export async function markNoteAsPrivate(id: string) {
-  await updateNote({
+  const note = await notes.updateNote({
     id,
     isPublic: false,
   });
 
-  revalidatePath("/notes");
+  revalidatePath(`/stories/${note.storyId}/notes`);
 }
 
 export async function updateNoteName({
@@ -28,12 +28,12 @@ export async function updateNoteName({
   id: string;
   name: string;
 }) {
-  await updateNote({
+  const note = await notes.updateNote({
     id,
     name,
   });
 
-  revalidatePath("/notes");
+  revalidatePath(`/stories/${note.storyId}/notes`);
 }
 
 export async function updateNoteContent({
@@ -43,10 +43,26 @@ export async function updateNoteContent({
   id: string;
   content: string;
 }) {
-  await updateNote({
+  const note = await notes.updateNote({
     id,
     content,
   });
 
-  revalidatePath("/notes");
+  revalidatePath(`/stories/${note.storyId}/notes`);
+}
+
+export async function createNote(storyId: string) {
+  await notes.createNote({
+    storyId,
+  });
+
+  revalidatePath(`/stories/${storyId}/notes`);
+}
+
+export async function removeNote({ id }: { id: string }) {
+  const note = await notes.deleteNote({
+    id,
+  });
+
+  revalidatePath(`/stories/${note.storyId}/notes`);
 }

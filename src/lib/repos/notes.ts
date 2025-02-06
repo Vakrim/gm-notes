@@ -7,6 +7,17 @@ export interface Note {
   isPublic: boolean;
 }
 
+export function createNote({ storyId }: { storyId: string }) {
+  return db.note.create({
+    data: {
+      storyId,
+      name: "Untitled note",
+      content: "",
+      isPublic: false,
+    },
+  });
+}
+
 export function updateNote({
   id,
   name,
@@ -21,5 +32,11 @@ export function updateNote({
   return db.note.update({
     where: { id },
     data: { isPublic, content, name },
+  });
+}
+
+export function deleteNote({ id }: { id: string }) {
+  return db.note.delete({
+    where: { id },
   });
 }
