@@ -1,17 +1,29 @@
 "use server";
 
-import { getUserByLogin } from "../repos/user";
+import { getUserByLogin } from "../../repos/user";
 import { TOTP } from "totp-generator";
 import { redirect } from "next/navigation";
-import { getSessionWithMeta } from "./getSession";
+import { getSessionWithMeta } from "../getSession";
 import { z } from "zod";
+import {
+  createResponseValidator,
+  Response,
+} from "../../createResponseValidator";
 
 const signInSchema = z.object({
   login: z.string(),
   otp: z.string(),
 });
 
-export async function signIn(params: z.infer<typeof signInSchema>) {
+const responseSchema = z.object({
+  error: z.string(),
+});
+
+const validateResponse = createResponseValidator(responseSchema);
+
+export async function signIn(
+  params: z.infer<typeof signInSchema>,
+): Promise<Response<typeof validateResponse>> {
   const { login, otp } = signInSchema.parse(params);
 
   const user = await getUserByLogin(login);
@@ -23,7 +35,7 @@ export async function signIn(params: z.infer<typeof signInSchema>) {
   const isVerified = TOTP.generate(user.OTPSecret).otp === otp;
 
   if (!isVerified) {
-    return { error: "Invalid OTP" };
+    return validateResponse({ error: "Invalid OTP" });
   }
 
   const session = await getSessionWithMeta();
