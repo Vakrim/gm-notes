@@ -4,20 +4,22 @@ import { useState } from "react";
 import {
   markNoteAsPrivate,
   markNoteAsPublic,
+  removeNote,
   updateNoteContent,
   updateNoteName,
 } from "../../../../lib/notes/actions";
 import { Note as NoteObject } from "../../../../lib/repos/notes";
 import { textInput } from "../../../../lib/ui/tailwindClasses";
 import clsx from "clsx";
+import { TrashButton } from "../../../../lib/ui/TrashButton";
 
 export const Note = ({ note }: { note: NoteObject }) => {
   const [name, setName] = useState(note.name);
   const [content, setContent] = useState(note.content);
 
   return (
-    <div key={note.id} className="note card mb-4 flex flex-col gap-4 ">
-      <div className="flex justify-between items-center">
+    <div key={note.id} className="note card mb-4 flex flex-col gap-4">
+      <div className="flex justify-between items-center gap-2">
         <input
           type="text"
           value={name}
@@ -28,7 +30,15 @@ export const Note = ({ note }: { note: NoteObject }) => {
               name,
             });
           }}
-          className={clsx(textInput, "flex-grow mr-2")}
+          className={clsx(textInput, "grow")}
+        />
+
+        <TrashButton
+          onClick={async () => {
+            await removeNote({
+              id: note.id,
+            });
+          }}
         />
 
         <label className="flex items-center">
@@ -60,7 +70,7 @@ export const Note = ({ note }: { note: NoteObject }) => {
             content,
           });
         }}
-        className="border border-gray-300 rounded px-2 py-1 w-full h-32"
+        className="border border-gray-300 rounded-sm px-2 py-1 w-full h-32"
       />
     </div>
   );

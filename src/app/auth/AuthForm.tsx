@@ -92,7 +92,7 @@ export const AuthForm = () => {
         <input
           type="submit"
           value="Sign up"
-          className="bg-primary rounded px-2 py-1 cursor-pointer hover:bg-primary-dark"
+          className="bg-primary rounded-sm px-2 py-1 cursor-pointer hover:bg-primary-dark"
         />
       </form>
     </>
