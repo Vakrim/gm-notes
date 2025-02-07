@@ -3,10 +3,12 @@ import { cookies } from "next/headers";
 import { sessionOptions } from "./sessionOptions";
 
 export interface SessionData {
-  data: {
-    id: string;
-    login: string;
-  } | null;
+  data: CurrentUser | null;
+}
+
+export interface CurrentUser {
+  id: string;
+  login: string;
 }
 
 export async function getSessionWithMeta() {

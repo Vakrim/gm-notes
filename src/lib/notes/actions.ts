@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import * as notes from "../repos/notes";
 import { z } from "zod";
+import { canEditNote } from "../authorization/note";
+import { canEditStory } from "../authorization/story";
 
 const noteIdSchema = z.object({
   noteId: z.string(),
@@ -10,6 +12,8 @@ const noteIdSchema = z.object({
 
 export async function markNoteAsPublic(params: z.infer<typeof noteIdSchema>) {
   const { noteId } = noteIdSchema.parse(params);
+
+  await canEditNote(noteId);
 
   const note = await notes.updateNote({
     id: noteId,
@@ -21,6 +25,8 @@ export async function markNoteAsPublic(params: z.infer<typeof noteIdSchema>) {
 
 export async function markNoteAsPrivate(params: z.infer<typeof noteIdSchema>) {
   const { noteId } = noteIdSchema.parse(params);
+
+  await canEditNote(noteId);
 
   const note = await notes.updateNote({
     id: noteId,
@@ -40,6 +46,8 @@ export async function updateNoteName(
 ) {
   const { id, name } = updateNoteNameSchema.parse(params);
 
+  await canEditNote(id);
+
   const note = await notes.updateNote({
     id,
     name,
@@ -58,6 +66,8 @@ export async function updateNoteContent(
 ) {
   const { id, content } = updateNoteContentSchema.parse(params);
 
+  await canEditNote(id);
+
   const note = await notes.updateNote({
     id,
     content,
@@ -73,6 +83,8 @@ const createNoteSchema = z.object({
 export async function createNote(params: z.infer<typeof createNoteSchema>) {
   const { storyId } = createNoteSchema.parse(params);
 
+  await canEditStory(storyId);
+
   await notes.createNote({
     storyId,
   });
@@ -81,10 +93,12 @@ export async function createNote(params: z.infer<typeof createNoteSchema>) {
 }
 
 export async function removeNote(params: z.infer<typeof noteIdSchema>) {
-  const { noteId: id } = noteIdSchema.parse(params);
+  const { noteId } = noteIdSchema.parse(params);
+
+  await canEditNote(noteId);
 
   const note = await notes.deleteNote({
-    id,
+    id: noteId,
   });
 
   revalidatePath(`/stories/${note.storyId}/notes`);
