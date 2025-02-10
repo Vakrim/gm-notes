@@ -28,6 +28,21 @@ export function getStory({ storyId }: { storyId: string }) {
   });
 }
 
+export function getPublicStory({ storyId }: { storyId: string }) {
+  return db.story.findUnique({
+    where: {
+      id: storyId,
+    },
+    include: {
+      notes: {
+        where: {
+          isPublic: true,
+        },
+      },
+    },
+  });
+}
+
 export function deleteStory({ storyId }: { storyId: string }) {
   return db.story.delete({
     where: { id: storyId },
