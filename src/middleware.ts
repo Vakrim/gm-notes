@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getSession } from "./lib/auth/getSession";
+import { match } from "path-to-regexp";
 
 export async function middleware(request: NextRequest) {
   const session = await getSession();
 
   if (
     !session &&
-    !publicRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
+    !publicRoutes.some((route) => route(request.nextUrl.pathname))
   ) {
     return NextResponse.redirect(new URL("/auth", request.url));
   }
@@ -19,4 +20,9 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-const publicRoutes = ["/auth", "/_next", "/favicon.ico"];
+const publicRoutes = [
+  match("/stories/:storyId/public"),
+  match("/auth", { end: false }),
+  match("/_next", { end: false }),
+  match("/favicon.ico"),
+];

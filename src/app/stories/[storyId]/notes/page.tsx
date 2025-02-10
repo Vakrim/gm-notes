@@ -4,6 +4,7 @@ import { createNote } from "../../../../lib/notes/actions";
 import { TrashButton } from "../../../../lib/ui/TrashButton";
 import { deleteStory } from "../../../../lib/stories/actions/deleteStory";
 import { getStory } from "../../../../lib/stories/actions/getStory";
+import Link from "next/link";
 
 export default async function StoryNotesPage({
   params,
@@ -19,7 +20,14 @@ export default async function StoryNotesPage({
   return (
     <>
       <div className="note mb-4 p-4 rounded-lg bg-white flex justify-between gap-2">
-        <h1 className="text-2xl font-bold">{story.name}</h1>
+        <h1 className="text-2xl font-bold grow">{story.name}</h1>
+
+        <Link href={`/stories/${story.id}/public`}>
+          <button className="px-2 py-1 rounded-sm bg-primary hover:bg-primary-dark cursor-pointer">
+            Show public view
+          </button>
+        </Link>
+
         <TrashButton onClick={deleteStory.bind(null, { storyId: story.id })} />
       </div>
 

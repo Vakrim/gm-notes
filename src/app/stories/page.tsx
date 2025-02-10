@@ -11,7 +11,7 @@ export default async function Stories() {
         <h1 className="text-2xl font-bold">Stories</h1>
         <button
           onClick={createStory}
-          className="px-2 py-1 rounded-sm bg-primary hover:bg-primary-dark"
+          className="px-2 py-1 rounded-sm bg-primary hover:bg-primary-dark cursor-pointer"
         >
           Create new story
         </button>
