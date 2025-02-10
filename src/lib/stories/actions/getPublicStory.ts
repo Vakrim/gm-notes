@@ -27,5 +27,5 @@ const createResponse = createResponseValidator(
 export async function getPublicStory(
   storyId: string,
 ): Promise<ValidResponse<typeof createResponse>> {
-  return createResponse(await stories.getStory({ storyId }));
+  return createResponse(await stories.getPublicStory({ storyId }));
 }
